@@ -32,6 +32,4 @@ def main():
 
 
 if __name__ == "__main__":
-    #main()
-    c = CodeReviewGenerator("D://olrep", "OLRS-3905", "main-5.5")
-    openweb(c)
+    main()
