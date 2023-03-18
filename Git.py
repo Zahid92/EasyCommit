@@ -12,6 +12,7 @@ class  Git:
         self.main_branch = main_branch
         self.dir = os.getcwd()
         self.changecwd(repo)
+        self.__fillcommits__()
 
 
     def setdirectory(self,dir:str):
@@ -38,12 +39,11 @@ class  Git:
 
 
     def __gitlog__(self) -> str:
-       # process = subprocess.run(shlex.split(f"git log {self.main_branch}..{self.my_branch}"))
         command=f"git log {self.main_branch}..{self.my_branch} --grep=\"{self.my_branch.split('_')[0]}\""
         return self.__executecommand__(command)
 
 
-    def fillcommits(self):
+    def __fillcommits__(self):
         commitchunks = self.__gitlog__().split("commit ")
         self.commitIds= list()
         for commit in commitchunks:
@@ -55,23 +55,15 @@ class  Git:
 
     def getlastcommit(self):
         return self.__gitlog__(1)
-    
-
-    def fillchangedfilesforcommits(self):
-        for index in range(0,len(self.commitIds)):
-            cmd=f"git show {self.commitIds[index][0]} --name-only --pretty=\"\""
-            self.filesChanged[self.commitIds[index][0]] = self.__executecommand__(cmd)
-
         
     def getcommits(self):
         return self.commitIds
     
 
     def getchangedfilesforcommit(self,commit):
-        if commit in self.filesChanged:
-            return self.filesChanged[commit]
-        else: 
-            return "CommitId Not Found."
+        cmd=f"git show {commit} --name-only --pretty=\"\""
+        return self.__executecommand__(cmd)
+
 
 
     def getfileschangedforbranch(self):

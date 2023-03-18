@@ -1,0 +1,8 @@
+Hi {reviewer},
+
+As discussed, I have implemented changes for {my_branch} in below files.
+Could you please review the changes.
+
+Repository: {repo}
+Branch : {my_branch}
+

@@ -13,34 +13,41 @@ class CodeReviewGenerator:
       |________________________|____________________________|
 
     '''
+    WIDTH=120
+
     def __init__(self, repo, branch, comparetobranch ="main-5.5") -> None:
         self.git = Git(branch, repo, comparetobranch) 
-        self.git.fillcommits()
-        self.git.fillchangedfilesforcommits()
     
 
-    def createTable(self) -> None:
+    def printTableOnConsole(self) -> None:
         commits= self.git.getcommits()
 
         if len(commits)==0:
             print("No commits found.")
             return
-        print("_"*100)
-        print(f"\n| CommitId{' '*(len(commits[0][0])-8)} | FilesChanged           ")
 
         for commit in commits:
             if commit[1] != True:
                 continue
             details = self.git.getchangedfilesforcommit(commit[0])
-            print("_"*100)
+            print(f"Commit: {commit[0]}")
+            print(f"Changed files:\n{details}")
+
+    def __tabledetails__(self):
+        table=dict()
+        for commit in self.git.getcommits():
+            if not commit[1]:
+                continue
+            details = self.git.getchangedfilesforcommit(commit[0])
             details=details.split("\n")
-            details=details[0:len(details)-1]
-            i=len(details)
-            j = i//2
-            for filename in details:
-                i-=1
-                cm = commit[0] if j==i else " " * len(commit[0])
-                print(f"\n| {cm} | {filename}")
-        print("_"*100)
+            details=tuple(details[0:len(details)-1])
+            table[commit[0]]=details
+        return table
+    
+    def gettable(self):
+        return self.__tabledetails__()
+
+
+
             
 

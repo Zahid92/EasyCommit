@@ -1,10 +1,13 @@
 import unittest
 from CodeReviewGenerator import *
+from WebPage import openweb
+
 ''' tests related to Git Class'''
 
 def testreviewgenerator():
-    c = CodeReviewGenerator("D://olrep", "OLRS-1938", "OLRS-1935")
+    c = CodeReviewGenerator("D://olrep", "OLRS-3905", "main-5.5")
     c.createTable()
+    openweb(c)
 
     
 def testgit():

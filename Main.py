@@ -1,6 +1,7 @@
 from Git import *
 from CodeReviewGenerator import * 
-import EngineeringBuildGenerator
+import PatchFileGenerator
+from WebPage import openweb
 
 def main():
     print("Welcome to EasyCommit")
@@ -17,7 +18,9 @@ def main():
                 print("not yet implemented this")
             elif action == '2':
                 tab = CodeReviewGenerator(repo, my_branch, main_branch)
-                tab.createTable()
+                tab.printTableOnConsole()
+                openweb(tab)
+                
             else:
                 print("OOPS not in the menu.")
 
@@ -29,4 +32,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    #main()
+    c = CodeReviewGenerator("D://olrep", "OLRS-3905", "main-5.5")
+    openweb(c)
