@@ -1,6 +1,6 @@
 from Git import *
 from CodeReviewGenerator import * 
-import PatchFileGenerator
+from PatchFileGenerator import PatchFileGenerator
 from WebPage import openweb
 
 def main():
@@ -15,12 +15,14 @@ def main():
             print("Which operation you want to perform: \n\tEngineering Build press --> 1\n\tCode Review table press --> 2\n")
             action= input()
             if action == '1':
-                print("not yet implemented this")
+                patchgenerator= PatchFileGenerator(repo, my_branch, main_branch)
+                patchgenerator.createzipfile()
+
             elif action == '2':
                 tab = CodeReviewGenerator(repo, my_branch, main_branch)
                 tab.printTableOnConsole()
                 openweb(tab)
-                
+
             else:
                 print("OOPS not in the menu.")
 
