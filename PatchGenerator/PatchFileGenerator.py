@@ -1,4 +1,4 @@
-from Git import Git
+from Git.Git import Git
 import os
 import shutil
 

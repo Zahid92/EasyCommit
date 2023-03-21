@@ -1,6 +1,6 @@
 import unittest
-from CodeReviewGenerator import *
-from WebPage import openweb
+from CodeReview.CodeReviewGenerator import *
+from BrowserView.WebPage import openweb
 
 ''' tests related to Git Class'''
 

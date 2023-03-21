@@ -1,7 +1,7 @@
-from Git import *
-from CodeReviewGenerator import * 
-from PatchFileGenerator import PatchFileGenerator
-from WebPage import openweb
+from Git.Git import *
+from CodeReview.CodeReviewGenerator import * 
+from PatchGenerator.PatchFileGenerator import PatchFileGenerator
+from BrowserView.WebPage import openweb
 
 def main():
     print("Welcome to EasyCommit")

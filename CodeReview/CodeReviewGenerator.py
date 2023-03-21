@@ -1,4 +1,4 @@
-from Git import *
+from Git.Git import *
 
 class CodeReviewGenerator:
     '''

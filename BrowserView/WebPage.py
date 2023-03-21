@@ -1,6 +1,6 @@
 # import module
 import webbrowser
-from CodeReviewGenerator import CodeReviewGenerator
+from CodeReview.CodeReviewGenerator import CodeReviewGenerator
 import os
 
 def openweb(crg:CodeReviewGenerator):
@@ -11,11 +11,12 @@ def openweb(crg:CodeReviewGenerator):
 
 def TableForWeb(crg:CodeReviewGenerator):
         table=crg.gettable()
+        COMMITURL=f'https://yourprojectrepositriesaddress/{crg.git.dir.split("/")[-1]}/commits/'
         tablehtml="<table>\n\t<tr>\n\t\t<th>Commit</th>\n\t\t<th>Files Changed</th>\n\t</tr>"
         for commit, details in table.items():
             i=len(details)
             j = i//2
-            tablehtml+=f"\n\t<tr>\n\t\t<td>{commit}</td>\n\t\t<td>"
+            tablehtml+=f'\n\t<tr>\n\t\t<td><a href="{COMMITURL}{commit}" target="_blank">{commit}</a></td>\n\t\t<td>'
             for filename in details:
                 i-=1
                 cm = commit if j==i else " " * len(commit)
@@ -65,7 +66,7 @@ def __createhtmlfile__(crg: CodeReviewGenerator):
     <body>
     Hi <r>recipient</r>,</br>
     </br>As per our discussion,</br>
-    I have implemented the changes regarding <r>story/defect</r> {branch}</br>
+    I have implemented the changes regarding <r>story/defect</r> <a href="https://yourjiraadress/{id}" target="_blank">{branch}</a></br>
     Could you review the changes.</br></br>
     <b>Repository: {repo}</b></br>
     <b>Branch: {branch}</b></br>
@@ -75,7 +76,7 @@ def __createhtmlfile__(crg: CodeReviewGenerator):
     </html>
     '''
     rep=crg.git.dir.split("//")[-1].upper()
-    html=html.format(style=style,table=table,branch=crg.git.my_branch,repo=rep)
+    html=html.format(style=style,table=table,id=crg.git.my_branch.split("_")[0],branch=crg.git.my_branch,repo=rep)
     with open("c:/temp/CodeReviewTable.html",'w') as fi:
         fi.write(html)
     
