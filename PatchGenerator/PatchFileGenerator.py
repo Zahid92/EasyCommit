@@ -53,7 +53,7 @@ class PatchFileGenerator:
 
     def __copyfiletofolder__(self, dir_name:str) -> None:
         # Get list of all files only in the given directory
-        list_of_files = filter( lambda x: os.path.isfile(os.path.join(dir_name, x)), os.listdir(dir_name) )
+        list_of_files = filter( lambda x: os.path.isfile(os.path.join(dir_name, x)) and (x.endswith(".dll") or x.endswith(".exe")), os.listdir(dir_name) )
         # Sort list of files based on last modification time in decending order
         list_of_files = sorted( list_of_files, key = lambda x: os.path.getmtime(os.path.join(dir_name, x)), reverse=True)
 
